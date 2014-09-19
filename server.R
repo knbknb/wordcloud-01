@@ -1,3 +1,5 @@
+library(rJava) 
+.jinit(parameters="-Xmx128g")
 library(shiny)
 library(shinyIncubator)
 
