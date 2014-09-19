@@ -20,12 +20,15 @@ library(RWeka) # for tokenization algorithms more complicated than single-word
 #         "Session.Abstract.Sort.Order"      
 # )  
 #
-# The list of valid tracks
+# The list of valid tracks, simplified
 tracks <<- list("Outreach" = "corpus--education-publicrel-outreach",
-                "Geo-Informatics" = "corpus--earthspaceinformatics",
-                "Earthquake research" = "corpus--seismo900_new",
+                
+                
+                "Earthquakes" = "corpus--seismo900_new",
                 "Climate" = "corpus--planetbiogeoclim",
-                "Volcano research" = "corpus--volcanology"
+                "Geo-Informatics" = "corpus--earthspaceinformatics",
+                "Volcanoes" = "corpus--volcanology",
+                "Complex systems" = "corpus--nonlin-geophys"
                 
                
                )
@@ -57,14 +60,14 @@ getTermMatrix <- memoise(function(track, ngram) {
         bodies <- (convbodies[!is.na(bodies)])
         myCorpus <- VCorpus(VectorSource(as.vector(bodies)))
         myCorpus = tm_map(myCorpus, content_transformer(tolower))
-        myCorpus = tm_map(myCorpus,  content_transformer(cleanup))
         myCorpus = tm_map(myCorpus, removePunctuation)
+        myCorpus = tm_map(myCorpus,  content_transformer(cleanup))
         myCorpus = tm_map(myCorpus, removeNumbers)
         myCorpus = tm_map(myCorpus, removeWords,
                           c(stopwords("SMART"), "thy", "thou", "thee"))
         myDTM = TermDocumentMatrix(myCorpus,
                                   # control = list(minWordLength = 1))   
-                                   control = list(minWordLength = 1, tokenize = nGramTokenizer)) 
+                                   control = list(minWordLength = 2, tokenize = nGramTokenizer)) 
         
         #warning(ht(myDTM))
         m = as.matrix(myDTM)
