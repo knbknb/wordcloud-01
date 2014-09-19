@@ -1,5 +1,3 @@
-# Text of the books downloaded from:
-# A Mid Summer Night's Dream:
 library(shiny)
 library(shinyIncubator)
 
@@ -15,12 +13,12 @@ shinyUI(fluidPage(
                                  choices = tracks, width="100%"),
                      actionButton("update", "Change"),
                      hr(),
-                     sliderInput("freq", 
-                                 "Minimum Frequency:", 
-                                 min = 1,  max = 50, value = 15),
                      sliderInput("max", 
-                                 "Maximum Number of Words:", 
-                                 min = 1,  max = 300,  value = 100)
+                                 "Number of items in Word-Cloud:", 
+                                 min = 1,  max = 100,  value = 15),
+                     sliderInput("freq", 
+                                 "Phrase must occur at least n times:", 
+                                 min = 1,  max = 50, value = 30)
         ),
         
         # Show Word Cloud
