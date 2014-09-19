@@ -1,7 +1,8 @@
 #
 options(mc.cores=1)
-#library(rJava) 
-#.jinit(parameters="-Xmx6g")
+library(rJava) 
+
+.jinit(parameters="-Xmx3g")
 #options( java.parameters = "-Xmx4g" )
 
 library(tm)
@@ -23,17 +24,18 @@ library(RWeka) # for tokenization algorithms more complicated than single-word
 tracks <<- list("Outreach" = "corpus--education-publicrel-outreach",
                 "Geo-Informatics" = "corpus--earthspaceinformatics",
                 "Earthquake research" = "corpus--seismo900_new",
-                "Planetary Sciences" = "corpus--planetbiogeoclim",
+                "Climate" = "corpus--planetbiogeoclim",
                 "Volcano research" = "corpus--volcanology"
                 
                
                )
 #UnigramTokenizer <<- function(x) NGramTokenizer(x, Weka_control(min = 1, max = 1))
-BigramTokenizer <<- function(x) NGramTokenizer(x, Weka_control(min = 2, max = 2))
-
+#BigramTokenizer <<- function(x) NGramTokenizer(x, Weka_control(min = 2, max = 2))
 
 # Using "memoise" to automatically cache the results
-getTermMatrix <- memoise(function(track) {
+getTermMatrix <- memoise(function(track, ngram) {
+        nGramTokenizer <- function(x) NGramTokenizer(x, Weka_control(min = ngram, max = ngram))
+        
         # Careful not to let just any name slip in here; a
         # malicious user could manipulate this value.
         if (!(track %in% tracks))
@@ -48,17 +50,21 @@ getTermMatrix <- memoise(function(track) {
         # warning(bodies[[1]])
         #myCorpus <- VCorpus(VectorSource(as.vector(data$bodies)))
         #bodies <- bodies[!is.na(bodies)]
+        convbodies <- iconv(bodies, to = "utf-8")
         
+        # The above conversion leaves you with vector entries "NA", i.e. those tweets that can't be handled. Remove the "NA" entries with the following command:
+        
+        bodies <- (convbodies[!is.na(bodies)])
         myCorpus <- VCorpus(VectorSource(as.vector(bodies)))
         myCorpus = tm_map(myCorpus, content_transformer(tolower))
-        #myCorpus = tm_map(myCorpus,  content_transformer(cleanup))
+        myCorpus = tm_map(myCorpus,  content_transformer(cleanup))
         myCorpus = tm_map(myCorpus, removePunctuation)
         myCorpus = tm_map(myCorpus, removeNumbers)
         myCorpus = tm_map(myCorpus, removeWords,
                           c(stopwords("SMART"), "thy", "thou", "thee"))
         myDTM = TermDocumentMatrix(myCorpus,
                                   # control = list(minWordLength = 1))   
-                                   control = list(minWordLength = 1, tokenize = BigramTokenizer)) 
+                                   control = list(minWordLength = 1, tokenize = nGramTokenizer)) 
         
         #warning(ht(myDTM))
         m = as.matrix(myDTM)
@@ -90,10 +96,10 @@ rmPunc = function(x){
         x
 }
 
-cleanup = function(doc, sep= " "){
+cleanup = function(doc, sep= "-"){
         doc = gsub("body:", "", doc, perl=TRUE);
         y = strsplit(doc, sep);
-        y = lapply(y, text_mining_util$rmPunc);
+        y = lapply(y, rmPunc);
         y[grep("\\S+", y, invert=FALSE, perl=TRUE)];
         y = sapply(y, paste, sep=" ")
         paste(y, collapse = sep)

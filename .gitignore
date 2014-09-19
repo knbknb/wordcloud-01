@@ -1,2 +1,3 @@
 ./data/Rdata/
 ./.Rdata
+data/Rdata/*.Rdata
