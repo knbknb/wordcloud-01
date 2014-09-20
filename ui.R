@@ -11,12 +11,16 @@ shinyUI(fluidPage(
         
         # Application title
         headerPanel("Word Clouds"),
-        wellPanel(div("Most common phrases in conference abstracts", class="lead"), div("AGU Fall Meeting 2012", class="lead"),
-                  div("The American Geophysical Union (AGU) is a professional society for Earth Scientists. Once a year, there is a big conference with more than 20000 participants
+        wellPanel(div("Most common phrases in conference abstracts, AGU Fall Meeting 2012", class="lead"),
+                  actionLink(label="MiniHelp", class="text-info", inputId="knbhelp"),
+                  div(div("The American Geophysical Union (AGU) is a professional society for Earth Scientists. Once a year, there is a big conference with more than 20000 participants
                       from around the world.", class="muted"),
-                  div("This web-app creates word clouds from conference abstracts. Each word cloud summarizes hundreds of science talks and posters. 
-                       Only a small subset of the conference 'tracks', and the sessions in these tracks are listed here, grouped by theme.", class="muted"),
-                  div("This app enables users to get a quick overview about important topics, buzzwords and common research themes within the unfamiliar but related subfields of sciences.", class="muted")
+                          div("This web-app creates Word Clouds from conference abstracts. Each word-cloud picture \"summarizes the summaries\" of hundreds of science talks and posters. ", class="muted"),
+                           div("In doing so, this app enables users to get a quick overview of important topics, buzzwords and common themes within a certain research area. 
+                               Many subfields of Earth Science are interesting, related to one's own specialty, but still unfamiliar because of their vastness, technicality and interdiciplinarity.", class="muted"),
+                           div("Note: Only a small subset of conference contributions, grouped by topic, are made queryable in the UI below.", class="muted"),
+                           class="knbtoggle", style="display: none"
+                          )
                   ),
        
         # Sidebar with a slider and selection inputs
@@ -37,13 +41,14 @@ shinyUI(fluidPage(
                                  min = 1,  max = 100,  value = 15),
                      sliderInput("freq", 
                                  "Phrase must occur at least n times:", 
-                                 min = 1,  max = 50, value = 30)
+                                 min = 1,  max = 50, value = 20)
 
         ),
         
         # Show Word Cloud
         mainPanel(
-                plotOutput("plot")
+                plotOutput("plot"),
+                tags$head(tags$script(src="knb.js"))
         )
 ))
 
