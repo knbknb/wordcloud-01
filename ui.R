@@ -8,10 +8,9 @@ actionButton <- function(inputId, label, btn.style = "" , css.class = "") {
 }
 shinyUI(fluidPage(
         progressInit(),
-        
         # Application title
-        headerPanel("Word Clouds"),
-        wellPanel(div("Most common phrases in conference abstracts, AGU Fall Meeting 2012", class="lead"),
+        titlePanel("Word Clouds"),
+        wellPanel(div("Common phrases in conference abstracts, AGU Fall Meeting 2012", class="lead"),
                   actionLink(label="MiniHelp", class="text-info", inputId="knbhelp"),
                   div(div("The American Geophysical Union (AGU) is a professional society for Earth Scientists. Once a year, there is a big conference with more than 20000 participants
                       from around the world.", class="muted"),
@@ -41,7 +40,13 @@ shinyUI(fluidPage(
                                  min = 1,  max = 100,  value = 15),
                      sliderInput("freq", 
                                  "Phrase must occur at least n times:", 
-                                 min = 1,  max = 50, value = 20)
+                                 min = 1,  max = 50, value = 20),
+                     hr(),
+                     radioButtons("plotsize", 
+                                  "Canvas Size:", 
+                                  selected = "auto",
+                                  c("auto" = "auto", "large" = "large"))
+                     
 
         ),
         

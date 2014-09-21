@@ -61,7 +61,7 @@ getTermMatrix <- memoise(function(track, ngram) {
         myCorpus <- VCorpus(VectorSource(as.vector(bodies)))
         myCorpus = tm_map(myCorpus, content_transformer(tolower))
         myCorpus = tm_map(myCorpus, removePunctuation)
-        myCorpus = tm_map(myCorpus,  content_transformer(cleanup))
+ #       myCorpus = tm_map(myCorpus,  content_transformer(cleanup))
         myCorpus = tm_map(myCorpus, removeNumbers)
         myCorpus = tm_map(myCorpus, removeWords,
                           c(stopwords("SMART"), "thy", "thou", "thee"))
