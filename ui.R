@@ -10,14 +10,14 @@ shinyUI(fluidPage(
         progressInit(),
         # Application title
         titlePanel("Word Clouds"),
-        wellPanel(div("Common phrases in conference abstracts, AGU Fall Meeting 2012", class="lead"),
+        wellPanel(div("Common phrases in conference abstracts, AGU Fall Meeting", class="lead"),
                   actionLink(label="MiniHelp", class="text-info", inputId="knbhelp"),
                   div(div("The American Geophysical Union (AGU) is a professional society for Earth Scientists. Once a year, there is a big conference with more than 20000 participants
                       from around the world.", class="muted"),
                           div("This web-app creates Word Clouds from conference abstracts. Each word-cloud picture \"summarizes the summaries\" of hundreds of science talks and posters. ", class="muted"),
-                           div("In doing so, this app enables users to get a quick overview of important topics, buzzwords and common themes within a certain research area. 
-                               Many subfields of Earth Science are interesting, related to one's own specialty, but still unfamiliar because of their vastness, technicality and interdiciplinarity.", class="muted"),
-                           div("Note: Only a small subset of conference contributions, grouped by topic, are made queryable in the UI below.", class="muted"),
+                           div("In doing so, this app enables users to get a quick overview of important topics, buzzwords and common themes within a certain research area.", class="muted"), 
+                           div("Many subfields of Earth Science are very interesting. However, many subfields are, or may have become, unfamiliar because of their vastness, technicality, interdiciplinarity, and rapid technological progress.", class="muted"),
+                           a("Read more...", class="text-success", title="Link to 5-Page Presentation on github", href="http://knbknb.github.io/wordcloud-01-pitch/index.html"),
                            class="knbtoggle", style="display: none"
                           )
                   ),
