@@ -1,6 +1,6 @@
 # wordcloud-01
 
-This repo contains homework for an online course.
+This repo contains homework for an online course I took in 2014.
 
 # Developing Data Products - R Course Project
 
