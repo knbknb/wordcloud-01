@@ -10,7 +10,7 @@ The Shiny Web-App is hosted on [https://rapps.shinyapps.io/wordcloud01/][4].
 
 There is also a _Slidify_ [presentation documenting and pitching the app][3].
 
-Related preprocessing scripts are in its [own repository](https://github.com/knbknb/R_text_mining) here on Github.
+Related [preprocessing scripts](https://github.com/knbknb/R_text_mining) sit in their own repository here on Github.
 
 ## Main Features
 
