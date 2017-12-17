@@ -14,7 +14,7 @@ shinyUI(fluidPage(
                   actionLink(label="MiniHelp", class="text-info", inputId="knbhelp"),
                   div(div("The American Geophysical Union (AGU) is a professional society for Earth Scientists. Once a year, there is a big conference with more than 20000 participants
                       from around the world.", class="muted"),
-                          div("This web-app creates Word Clouds from conference abstracts. Each word-cloud picture \"summarizes the summaries\" of hundreds of science talks and posters. ", class="muted"),
+                          div("This web-app creates Word Clouds from conference abstracts. Each word-cloud picture \"summarizes the summaries\" of hundreds of science talks and posters. ", class="text-success"),
                            div("In doing so, this app enables users to get a quick overview of important topics, buzzwords and common themes within a certain research area.", class="muted"), 
                            div("Many subfields of Earth Science are very interesting. However, many subfields are, or may have become, unfamiliar because of their vastness, technicality, interdiciplinarity, and rapid technological progress.", class="muted"),
                            a("Read more...", class="text-success", title="Link to 5-Page Presentation on github", href="http://knbknb.github.io/wordcloud-01-pitch/index.html"),

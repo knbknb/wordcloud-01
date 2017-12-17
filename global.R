@@ -105,7 +105,7 @@ cleanup = function(doc, sep= "-"){
         y = lapply(y, rmPunc);
         y[grep("\\S+", y, invert=FALSE, perl=TRUE)];
         y = sapply(y, paste, sep=" ")
-        paste(y, collapse = sep)
+        y <- paste(y, collapse = sep)
         y
 }
 
