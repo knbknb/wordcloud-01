@@ -20,7 +20,7 @@ Wait a bit (2 minutes) for the app to startup. (I have no control over the durat
 
 ### Preview
 
-This is what the app shpuld look like after startup:
+This is what the app should look like after startup:
 
 ![preview of shinyapp](img/Selection_279-wordclouds01.png)
 
